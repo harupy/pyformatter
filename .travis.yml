@@ -6,7 +6,6 @@ install:
   - export PIPENV_VENV_IN_PROJECT=1
   - pip install pipenv
   - pipenv install
-  - export VIRTUAL_ENV=.venv/
 script:
   - python -m pytest
 after_success:
