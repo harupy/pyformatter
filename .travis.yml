@@ -1,0 +1,13 @@
+language: python
+cache: pip
+python:
+  - ‘3.7’
+install:
+  - export PIPENV_VENV_IN_PROJECT=1
+  - export VIRTUAL_ENV=".venv/"
+  - pip install pipenv
+  - pipenv install
+script:
+  - python -m pytest
+after_success:
+  - pipenv run zappa update dev

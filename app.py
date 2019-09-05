@@ -1,6 +1,13 @@
 from flask import Flask
-app = Flask(__name__)
+from flask_cors import CORS
 
-@app.route("/")
-def hello():
-    return "Hello World!"
+
+def create_app():
+  app = Flask(__name__)
+  CORS(app)
+
+  @app.route('/')
+  def hello():
+    return 'pyformatter'
+
+  return app

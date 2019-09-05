@@ -1,1 +1,8 @@
 .DS_Store
+node_modules/
+.serverless/
+.vscode/
+.venv/
+__pycache__/
+.pytest_cache/
+notes.md
