@@ -1,7 +1,7 @@
 language: python
 cache: pip
 python:
-  - ‘3.7’
+  - '3.7'
 install:
   - export PIPENV_VENV_IN_PROJECT=1
   - export VIRTUAL_ENV=".venv/"
