@@ -8,6 +8,6 @@ def create_app():
 
   @app.route('/')
   def hello():
-    return 'pyformatter'
+    return 'hello pyformatter'
 
   return app
