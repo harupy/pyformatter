@@ -8,8 +8,8 @@ def test_index(client):
 
 def test_format(client):
   # TODO: add a few more test cases
-  code = 'a=1+1 # foo'
-  formatted = 'a = 1 + 1  # foo\n'
+  code = 'a=1+1 # bar'
+  formatted = 'a = 1 + 1  # bar\n'
 
   data = {
     'code': code
