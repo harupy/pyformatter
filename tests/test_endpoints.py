@@ -3,7 +3,6 @@
 def test_index(client):
   r = client.get('/')
   assert r.status_code == 200
-  assert r.data == b'pyformatter'
 
 
 def test_format(client):
