@@ -2,6 +2,12 @@
 
 https://pyformatter.com
 
+## Test
+
+```
+python -m pytest
+```
+
 ## Ref.
 
 - [Miserlou/Zappa: Serverless Python](https://github.com/Miserlou/Zappa)
