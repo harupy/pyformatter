@@ -3,30 +3,43 @@
 def test_index(client):
   r = client.get('/')
   assert r.status_code == 200
-  assert r.data == b'hello pyformatter'
+  assert r.data == b'pyformatter'
 
 
 def test_format(client):
-  # TODO: add a few more test cases
-  code = 'a=1+1 # bar'
-  formatted = 'a = 1 + 1  # bar\n'
+  cases = [
+    {
+      'before': 'a=1+2*3/4\n',
+      'after': 'a = 1 + 2 * 3 / 4\n'
+    },
+    {
+      'before': 'a = 1\n\n\n',
+      'after': 'a = 1\n'
+    },
+    {
+      'before': 'a =   1\n',
+      'after': 'a = 1\n'
+    },
+    {
+      'before': 'a = 1 # foo\n',
+      'after': 'a = 1  # foo\n',
+    },
+    {
+      'before': 'def foo():\n  pass\n',
+      'after': 'def foo():\n    pass\n',
+    },
+    {
+      'before': 'def foo():\n    pass\n',
+      'after': 'def foo():\n  pass\n',
+      'options': {'indent_size': 2}
+    }
+  ]
 
-  data = {
-    'code': code
-  }
-  r = client.get('/api/format', query_string=data)
-  assert r.status_code == 200
-  assert r.json['code'] == formatted
-
-
-def test_indent_size(client):
-  code = 'def foo():\n    pass\n'
-  formatted = 'def foo():\n  pass\n'
-
-  data = {
-    'code': code,
-    'indent_size': 2
-  }
-  r = client.get('/api/format', query_string=data)
-  assert r.status_code == 200
-  assert r.json['code'] == formatted
+  for case in cases:
+    data = {
+      'code': case.get('before'),
+      **case.get('options', {})
+    }
+    r = client.get('/api/format', query_string=data)
+    assert r.status_code == 200
+    assert r.json['code'] == case['after']
