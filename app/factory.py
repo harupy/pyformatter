@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, request, jsonify
+from flask import Flask, Blueprint, request, jsonify, render_template
 from flask_cors import CORS
 import autopep8
 
@@ -8,12 +8,12 @@ def to_int_if_possible(x):
 
 
 def create_app():
-  app = Flask(__name__)
+  app = Flask(__name__, template_folder='./templates')
   CORS(app)
 
   @app.route('/')
   def index():
-    return 'pyformatter'
+    return render_template('index.html')
 
   return app
 
