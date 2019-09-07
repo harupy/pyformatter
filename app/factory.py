@@ -1,9 +1,21 @@
-from flask import Blueprint, request, jsonify
+from flask import Flask, Blueprint, request, jsonify
+from flask_cors import CORS
 import autopep8
 
 
 def to_int_if_possible(x):
   return int(x) if x.isdigit() else x
+
+
+def create_app():
+  app = Flask(__name__)
+  CORS(app)
+
+  @app.route('/')
+  def index():
+    return 'pyformatter'
+
+  return app
 
 
 def create_api():
