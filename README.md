@@ -2,6 +2,12 @@
 
 https://pyformatter.com
 
+## How to run
+
+```
+docker-compose up
+```
+
 ## Example
 
 ```python
