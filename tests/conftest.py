@@ -1,14 +1,7 @@
 import pytest
-from app.factory import create_app
+from app import app
 
 
 @pytest.fixture
-def app():
-  app = create_app()
-  app.testing = True
-  return app
-
-
-@pytest.fixture
-def client(app):
+def client():
   return app.test_client()

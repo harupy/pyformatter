@@ -7,7 +7,7 @@ install:
   - pip install pipenv
   - pipenv install
 script:
-  - flake8
+  - flake8 -v
   - python -m pytest
 after_success:
   - pipenv run zappa update dev
