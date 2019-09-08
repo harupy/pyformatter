@@ -1,12 +1,10 @@
 import pytest
-from app.factory import create_app, create_api
+from app.factory import create_app
 
 
 @pytest.fixture
 def app():
   app = create_app()
-  api = create_api()
-  app.register_blueprint(api)
   app.testing = True
   return app
 
