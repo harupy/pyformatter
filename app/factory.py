@@ -12,10 +12,16 @@ def create_api():
 
   @api.route('/format')
   def format_code():
+    # convert integer options (e.g. indent_size and max_line_length)
+    # because autopep8 doesn't accept them if they are strings.
     params = {k: to_int_if_possible(v) for k, v in request.args.to_dict().items()}
     code = params.pop('code')
 
-    # TODO: add an option which allows users to select autoformat provider (yapf or autopep8)
+    # TODO: add an option which allows users to choose a code formatter
+
+    # autopep8 ignores some errors (E226, E24, W50, and W690) by default.
+    # "select" here reverts these ignored errors.
+    # see the official doc for detail: https://github.com/hhatto/autopep8#usage
     new_code = autopep8.fix_code(code, options={**params, 'select': ['E', 'W']})
     return jsonify(code=new_code)
 
