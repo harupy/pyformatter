@@ -7,17 +7,6 @@ def to_int_if_possible(x):
   return int(x) if x.isdigit() else x
 
 
-def create_app():
-  app = Flask(__name__, template_folder='./templates')
-  CORS(app)
-
-  @app.route('/')
-  def index():
-    return render_template('index.html')
-
-  return app
-
-
 def create_api():
   api = Blueprint('api', __name__, url_prefix='/api')
 
@@ -31,3 +20,17 @@ def create_api():
     return jsonify(code=new_code)
 
   return api
+
+
+def create_app():
+  app = Flask(__name__, template_folder='./templates')
+  CORS(app)
+
+  api = create_api()
+  app.register_blueprint(api)
+
+  @app.route('/')
+  def index():
+    return render_template('index.html')
+
+  return app
